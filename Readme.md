@@ -2,14 +2,20 @@
 
 ## Entorno virtual
 
+Crea un entorno virtual
+
+```
 python -m venv entorno
+```
 
+Actívalo
+```
 source ./entorno/bin/activate
-
+```
 
 ## Aplicación
 
-Fichero: requirements.txt
+Define los requisitos de la aplicación en el fichero: requirements.txt
 
 ```
 
@@ -17,7 +23,7 @@ Flask
 Gunicorn
 
 ```
-Aplicación: app.py
+Crea la aplicación Hola Mundo en el fichero app.py
 
 ```python
 
@@ -32,15 +38,27 @@ def hello_world():
 
 ```
 
+Instala los requisitos:
 
+```
 pip install -r requirements.txt
+```
 
+Ejecuta la aplicación en el servidor por defecto de Flask:
+
+```
 flask --app app run --port 8080 --debug
+# Ctrl+C para deterner
+```
 
+Ejecuta la aplicación en el servidor Gunicorn:
+```
 gunicorn app:app -b 0.0.0.0:8080
-
+```
 
 ## Contenerización
+
+Para contenerizar la aplicación crea el fichero Dockerfile:
 
 ```
 
@@ -60,8 +78,14 @@ CMD ["gunicorn", "app:app", "-b 0.0.0.0:8080"]
 
 ```
 
+Construye la imagen:
 
+```
 docker build -t hello-flask:1.0.0 .
+```
 
+Ejecútala en un contenedor:
 
-docker run -d --rm -p 8080:8080 hello-flask:1.0.0
+```
+docker run -d --name flaskapp -p 8080:8080 hello-flask:1.0.0
+```
